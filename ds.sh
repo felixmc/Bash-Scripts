@@ -1,14 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
-NU_STD=()
-
-if [ -t 1 ]; then
-	NU_STD[0]=">/dev/null"
+if test -t 1; then
+  exec 1>/dev/null
 fi
 
-if [ -t 2 ]; then
-	NU_STD[1]="2>/dev/null"
+if test -t 2; then
+  exec 2>/dev/null
 fi
 
-eval "$@ ${NU_STD[@]} &"
-disown
+"$@" &
